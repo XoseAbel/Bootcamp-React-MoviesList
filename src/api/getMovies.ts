@@ -1,7 +1,7 @@
 import { APIKEY, BASEURL } from '../const/const';
 
-const getMovies = async () => {
-  let UrlToFetch = `${BASEURL}${APIKEY}&query=${'comedy'}`;
+const getMovies = async (query: string | null) => {
+  let UrlToFetch = `${BASEURL}${APIKEY}&query=${query}`;
 
   try {
     const result = await fetch(UrlToFetch);

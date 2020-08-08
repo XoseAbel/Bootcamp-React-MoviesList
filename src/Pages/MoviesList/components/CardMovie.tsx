@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 
 import Typography from '@material-ui/core/Typography';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -21,14 +22,21 @@ const useStyles = makeStyles({
 export default function CardMovie({ data }: any) {
   const classes = useStyles();
 
+  let history = useHistory();
+  function handleRoute() {
+    history.push(`/movies/${data.id}`);
+  }
+
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} onClick={handleRoute}>
       <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
-          title={data.title}
-        />
+        {data.poster_path && (
+          <CardMedia
+            className={classes.media}
+            image={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
+            title={data.title}
+          />
+        )}
         <CardContent>
           <Typography gutterBottom variant='h5' component='h2'>
             {data.title}
